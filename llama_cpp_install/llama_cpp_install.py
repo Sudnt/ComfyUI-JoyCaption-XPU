@@ -16,15 +16,22 @@ def install_llama():
     try:
         import torch
         has_gpu = torch.cuda.is_available()
+        has_xpu = torch.xpu.is_available()
     except ImportError:
         has_gpu = False
+        has_xpu = False
 
     if has_gpu:
         os.environ["CMAKE_ARGS"] = "-DGGML_CUDA=on"
         print("✅ GPU detected — building with CUDA support")
-    else:
-        print("🖥️ No GPU detected — building CPU-only version")
 
+    if has_xpu
+        os.environ["CMAKE_ARGS"] = "-DGGML_SYCL=on -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx" 
+    print("✅ XPU detected — building with SYCL support")
+    
+    else:
+        print("🖥️ No CUDA GPU or XPU detected — building CPU-only version")
+        
     run(f"{sys.executable} -m pip install llama-cpp-python --no-cache-dir")
     os.environ.pop("CMAKE_ARGS", None)
 
@@ -32,3 +39,4 @@ def install_llama():
 
 if __name__ == "__main__":
     install_llama()
+
