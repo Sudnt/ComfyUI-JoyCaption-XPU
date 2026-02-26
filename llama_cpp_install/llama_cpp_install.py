@@ -25,7 +25,7 @@ def install_llama():
         os.environ["CMAKE_ARGS"] = "-DGGML_CUDA=on"
         print("✅ GPU detected — building with CUDA support")
 
-    if has_xpu
+    if has_xpu:
         os.environ["CMAKE_ARGS"] = "-DGGML_SYCL=on -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx" 
     print("✅ XPU detected — building with SYCL support")
     
@@ -39,4 +39,5 @@ def install_llama():
 
 if __name__ == "__main__":
     install_llama()
+
 
